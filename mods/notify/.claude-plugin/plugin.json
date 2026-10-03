@@ -1,6 +1,6 @@
 {
   "name": "notify",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Animated desktop notifications when a session starts, a turn finishes, a tool fails, the context fills up, or Claude asks for permission. Nothing extra to install.",
   "author": {
     "name": "Dean",
@@ -18,7 +18,7 @@
       "type": "string",
       "title": "Language",
       "description": "Language of the notifications and /notify. auto follows your system language.",
-      "default": "auto",
+      "default": "en",
       "options": [
         "auto",
         "en",
