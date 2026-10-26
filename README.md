@@ -93,30 +93,39 @@ With the plugin installed ([see Installation](#installation)), four kinds of cap
 | Surface | How you use it |
 | --- | --- |
 | **Skills** | Load automatically when relevant — e.g. ask for a chart, a `.docx`, or MCP-server help and the matching skill kicks in. You can also name one, e.g. "use the planning-with-files skill". |
-| **Commands** | Type a slash command, e.g. `/orchestrate ...` or `/cc:create-command`. Type `/` to browse them. |
-| **Subagents** | Delegate work to a named helper (see [Orchestration](#orchestration)), or let Claude pick one. |
+| **Commands** | Type a slash command, e.g. `/do ...` or `/cc:create-command`. Type `/` to browse them. |
+| **Subagents** | Delegate work to a named helper (see [Agents](#agents)), or let Claude pick one. |
 | **Mods** | Background behaviors like desktop notifications (see [Mods](#mods)). |
 
 If you're unsure what's available, just ask Claude in the session ("what skills/commands do I have?").
 
-### Orchestration
+### Agents
 
-`agents/` holds a small delegation hierarchy for running a larger task across several subagents:
+`agents/` holds a delegation hierarchy modeled as a small company: a coordinator routes a goal to department agents, each department does its scoped work and reports back, and results are verified before they're accepted. **No agent performs outward actions** — anything bound for email, publishing, or an external system is produced as a draft for a human to send.
 
-| Subagent | Role |
+**Company (cross-function)** — use `/do` when a goal spans more than one department; it hands off to the coordinator:
+
+```bash
+/do research our top 3 competitors and draft a one-page summary
+```
+
+| Agent | Role |
 | --- | --- |
-| [`orchestrator`](./agents/orchestrator.md) | Decomposes a goal into subtasks, delegates each to a worker, verifies results against acceptance criteria, and bounces failures back. Doesn't write code itself. |
+| [`coordinator`](./agents/coordinator.md) | Routes a goal to departments, verifies and aggregates their results, and stops at a human approval gate before any outward action. Doesn't do the work itself. |
+| [`researcher`](./agents/researcher.md) | Gathers and verifies information (web + repo), returns a sourced report. Read-only. |
+| [`writer`](./agents/writer.md) | Drafts documents, content, and outbound messages — **drafts only**, never sends. |
+| [`analyst`](./agents/analyst.md) | Analyzes data and reports findings. |
+
+**Engineering squad** — the engineering department the coordinator delegates coding work to:
+
+| Agent | Role |
+| --- | --- |
+| [`orchestrator`](./agents/orchestrator.md) | Decomposes an engineering goal into subtasks, delegates each to a worker, verifies results, and bounces failures back. Doesn't write code itself. |
 | [`implementer`](./agents/implementer.md) | Implements one scoped coding subtask. |
 | [`tester`](./agents/tester.md) | Writes and runs tests, reports objective evidence. |
 | [`reviewer`](./agents/reviewer.md) | Read-only quality gate; returns a PASS/FAIL verdict. |
 
-Kick it off with the `/orchestrate` command:
-
-```bash
-/orchestrate add rate limiting to the public API and cover it with tests
-```
-
-The orchestrator fans the work out to the workers (in parallel where it can), checks each result, and only reports done once the evidence holds up — so delegation and verification stay in one loop.
+`/do` hands off to the coordinator, which fans the work out to the departments (in parallel where it can), verifies each result, and holds anything outbound as a draft for you to send.
 
 ### Mods
 
