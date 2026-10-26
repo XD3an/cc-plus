@@ -111,21 +111,20 @@ If you're unsure what's available, just ask Claude in the session ("what skills/
 
 | Agent | Role |
 | --- | --- |
-| [`coordinator`](./agents/coordinator.md) | Routes a goal to departments, verifies and aggregates their results, and stops at a human approval gate before any outward action. Doesn't do the work itself. |
-| [`researcher`](./agents/researcher.md) | Gathers and verifies information (web + repo), returns a sourced report. Read-only. |
-| [`writer`](./agents/writer.md) | Drafts documents, content, and outbound messages — **drafts only**, never sends. |
-| [`analyst`](./agents/analyst.md) | Analyzes data and reports findings. |
+| [`coordinator`](./agents/coordinator.md) | Routes a goal to departments, sends each result to that department's verifier, aggregates, and holds anything outbound as a draft at a human approval gate. Doesn't do the work itself. |
 
-**Engineering squad** — the engineering department the coordinator delegates coding work to:
+Each department pairs a **doer** with an independent **verifier** — the coordinator accepts a result only when its verifier passes:
 
-| Agent | Role |
-| --- | --- |
-| [`orchestrator`](./agents/orchestrator.md) | Decomposes an engineering goal into subtasks, delegates each to a worker, verifies results, and bounces failures back. Doesn't write code itself. |
-| [`implementer`](./agents/implementer.md) | Implements one scoped coding subtask. |
-| [`tester`](./agents/tester.md) | Writes and runs tests, reports objective evidence. |
-| [`reviewer`](./agents/reviewer.md) | Read-only quality gate; returns a PASS/FAIL verdict. |
+| Department | Doer | Verifier |
+| --- | --- | --- |
+| Engineering | [`engineering`](./agents/engineering.md) lead → [`implementer`](./agents/implementer.md) | [`tester`](./agents/tester.md) + [`reviewer`](./agents/reviewer.md) |
+| Research | [`researcher`](./agents/researcher.md) | [`fact-checker`](./agents/fact-checker.md) |
+| Content | [`writer`](./agents/writer.md) | [`editor`](./agents/editor.md) |
+| Data | [`analyst`](./agents/analyst.md) | [`data-checker`](./agents/data-checker.md) |
 
-`/do` hands off to the coordinator, which fans the work out to the departments (in parallel where it can), verifies each result, and holds anything outbound as a draft for you to send.
+Engineering runs its own internal loop — the lead delegates to the implementer, then the tester and reviewer; the other departments are verified by the coordinator. Note the honest difference: engineering's verification is a real test run, while the research / content / data verifiers are an independent second pass, not a mechanical gate.
+
+`/do` hands off to the coordinator, which fans the work out (in parallel where it can), runs each doer's result past its verifier, and holds anything outbound as a draft for you to send.
 
 ### Mods
 

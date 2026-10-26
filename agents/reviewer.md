@@ -2,7 +2,7 @@
 name: reviewer
 description: Read-only worker subagent that reviews a scoped change for correctness,
   scope creep, and adherence to repo conventions, then returns a PASS/FAIL verdict with
-  specific reasons. Use as the quality gate before the orchestrator accepts a subtask.
+  specific reasons. Use as the quality gate before the engineering lead accepts a subtask.
 tools: Read, Grep, Glob, Bash
 ---
 

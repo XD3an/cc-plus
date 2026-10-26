@@ -15,4 +15,4 @@ You verify ONE scoped change by exercising it.
   and the first real failure verbatim.
 - Never report "passing" without having run something. If you could not run it, say so
   and why.
-- Do not change product code to make a test pass — report the failure to the orchestrator.
+- Do not change product code to make a test pass — report the failure back to whoever delegated the task.

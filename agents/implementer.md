@@ -1,7 +1,7 @@
 ---
 name: implementer
 description: Worker subagent that implements a single, well-scoped coding subtask
-  handed to it (usually by the orchestrator). Writes and edits code to meet the given
+  handed to it (usually by the engineering lead). Writes and edits code to meet the given
   acceptance criteria, then reports exactly what it changed. Does not test or review
   its own work.
 tools: Read, Write, Edit, Grep, Glob, Bash
