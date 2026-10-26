@@ -9,10 +9,5 @@
   "homepage": "https://github.com/XD3an/cc-plus",
   "repository": "https://github.com/XD3an/cc-plus",
   "license": "MIT",
-  "keywords": ["skills", "commands", "mods", "mcp", "claude-code", "productivity"],
-  "dependencies": [
-    { "name": "humanizer", "marketplace": "humanizer" },
-    { "name": "impeccable", "marketplace": "impeccable" },
-    { "name": "notify", "marketplace": "cc-plus" }
-  ]
+  "keywords": ["skills", "commands", "mods", "mcp", "claude-code", "productivity"]
 }

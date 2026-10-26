@@ -7,8 +7,6 @@
     "hookify@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
     "mgrep@Mixedbread-Grep": true,
-    "humanizer@humanizer": true,
-    "impeccable@impeccable": true,
     "notify@cc-plus": true
   }
 }

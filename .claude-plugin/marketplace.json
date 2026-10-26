@@ -5,7 +5,6 @@
     "name": "Dean",
     "url": "https://github.com/XD3an"
   },
-  "allowCrossMarketplaceDependenciesOn": ["humanizer", "impeccable"],
   "plugins": [
     {
       "name": "cc-plus",

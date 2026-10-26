@@ -2,60 +2,7 @@
 
 A lean, curated set of custom skills, commands, hooks, and plugin config for Claude Code.
 
-## Resources
-
-### Official Documentation
-
-- [Claude Code Docs](https://code.claude.com/docs/en/overview) - Official documentation
-- [Claude Code Skills](https://github.com/anthropics/skills/tree/main/skills) - Official skills repository
-- [Claude Code Plugins](https://github.com/anthropics/claude-code/tree/main/plugins) - Official plugins
-
-> The document skills (`docx`, `pdf`, `pptx`, `xlsx`) are not redistributed here: they are under Anthropic's proprietary license. Get them from the official [anthropics/skills](https://github.com/anthropics/skills) repo or the `document-skills` plugin.
-
-### Community Resources
-
-- [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) - Claude Code workflows, slash-commands, and templates
-- [superpowers-claude-code](https://github.com/obra/superpowers-claude-code) - Superpowers for Claude Code
-- [compound-engineering-plugin](https://github.com/EveryInc/compound-engineering-plugin) - Compound Engineering Plugin for Claude Code
-
-### Bundled Plugin Dependencies
-
-cc-plus doesn't vendor these, but declares them as [plugin dependencies](https://code.claude.com/docs/en/plugin-dependencies) in `.claude-plugin/plugin.json`, so installing cc-plus also resolves and enables them:
-
-- [humanizer](https://github.com/blader/humanizer) - removes AI-writing tells from text
-- [impeccable](https://github.com/pbakaus/impeccable) - frontend design fluency: `/impeccable polish`, `audit`, `critique`, ...
-- [notify](./mods/notify) - desktop notifications, from this marketplace
-
-Their marketplaces must already be known to your Claude Code installation, otherwise install reports a `dependency-unsatisfied` error naming the command to run first:
-
-```bash
-/plugin marketplace add blader/humanizer
-/plugin marketplace add pbakaus/impeccable
-```
-
-## Structure
-
-```
-cc-plus/
-├── .claude-plugin/             # Plugin metadata (plugin.json, marketplace.json)
-├── commands/                   # Custom commands
-├── examples/                   # Reference files (e.g. settings.json for manual installs)
-├── mods/                       # Function-hook mods, each its own plugin in the marketplace
-├── resources/                  # Reference material: example CLAUDE.md files, slash-commands, workflow guides
-├── scripts/                    # Standalone utility scripts (model switching, litellm proxy)
-├── skills/                     # Custom skills
-├── .dockerignore
-├── .env.example
-├── .gitignore
-├── .mcp.json
-├── docker-compose.yml
-├── Dockerfile
-├── LICENCE
-├── README.docker.md
-└── README.md
-```
-
-## Usage
+## Installation
 
 ### Option 1: Install as Plugin
 
@@ -102,7 +49,7 @@ Desktop notifications come from the [`notify`](./mods/notify) mod: install it wi
 
 Copy desired MCP servers from `.mcp.json` to your `~/.claude.json`.
 
-**Important:** Replace any `YOUR_*_HERE` placeholders with your actual API keys.
+**Important:** Some servers need credentials of their own — the `github` server reads a `GITHUB_PERSONAL_ACCESS_TOKEN`, and `notion` requires an OAuth authorization on first use. Supply these in your own config; `.mcp.json` ships without any secrets.
 
 ### Option 3: Use as Plugin Directory
 
@@ -114,7 +61,11 @@ claude --plugin-dir "path/to/cc-plus"
 
 For a containerized deployment (isolated Linux environment with Claude Code pre-installed), see [README.docker.md](./README.docker.md) for detailed instructions.
 
-## Mods
+## Usage
+
+Once installed, cc-plus adds skills, commands, and mods to Claude Code. Skills and commands load automatically; mods are installed per-plugin (see below).
+
+### Mods
 
 `mods/` holds Claude Code mods: plugins written as TypeScript function hooks (`hooks/hooks.json` → `{ "modules": ["./register.ts"] }`). Each mod is a separate plugin in this marketplace, so you can install, disable, or break one without touching the others.
 
@@ -136,6 +87,30 @@ claude plugin test ./mods/notify
 
 > Mods are an early-access Claude Code surface and the API may change between releases.
 
+## Structure
+
+```
+cc-plus/
+├── .claude-plugin/             # Plugin metadata (plugin.json, marketplace.json)
+├── agents/                     # Custom subagents
+├── commands/                   # Custom commands
+├── examples/                   # Reference files (e.g. settings.json for manual installs)
+├── mods/                       # Function-hook mods, each its own plugin in the marketplace
+├── resources/                  # Reference material: example CLAUDE.md files, slash-commands, workflow guides
+├── scripts/                    # Standalone utility scripts (model switching, litellm proxy)
+├── skills/                     # Custom skills
+├── themes/                     # Custom color themes
+├── .dockerignore
+├── .env.example
+├── .gitignore
+├── .mcp.json
+├── docker-compose.yml
+├── Dockerfile
+├── LICENCE
+├── README.docker.md
+└── README.md
+```
+
 ## Configuration
 
 Copy `.env.example` to `.env` and configure your settings:
@@ -145,6 +120,39 @@ cp .env.example .env
 ```
 
 For manual installs, start from [`examples/settings.json`](./examples/settings.json) and adjust `enabledPlugins`/`hooks` to taste.
+
+## Resources
+
+### Official Documentation
+
+- [Claude Code Docs](https://code.claude.com/docs/en/overview) - Official documentation
+- [Claude Code Skills](https://github.com/anthropics/skills/tree/main/skills) - Official skills repository
+- [Claude Code Plugins](https://github.com/anthropics/claude-code/tree/main/plugins) - Official plugins
+
+> The document skills (`docx`, `pdf`, `pptx`, `xlsx`) are not redistributed here: they are under Anthropic's proprietary license. Get them from the official [anthropics/skills](https://github.com/anthropics/skills) repo or the `document-skills` plugin.
+
+### Community Resources
+
+- [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) - Claude Code workflows, slash-commands, and templates
+- [superpowers-claude-code](https://github.com/obra/superpowers-claude-code) - Superpowers for Claude Code
+- [compound-engineering-plugin](https://github.com/EveryInc/compound-engineering-plugin) - Compound Engineering Plugin for Claude Code
+
+### Recommended Plugins
+
+cc-plus pairs well with these plugins. They're not required and aren't installed for you — add them if you want the extra capabilities:
+
+- [humanizer](https://github.com/blader/humanizer) - removes AI-writing tells from text
+- [impeccable](https://github.com/pbakaus/impeccable) - frontend design fluency: `/impeccable polish`, `audit`, `critique`, ...
+- [notify](./mods/notify) - desktop notifications, from this marketplace (`/plugin install notify@cc-plus`)
+
+To install the external ones, add their marketplaces first, then install:
+
+```bash
+/plugin marketplace add blader/humanizer
+/plugin marketplace add pbakaus/impeccable
+/plugin install humanizer@humanizer
+/plugin install impeccable@impeccable
+```
 
 ## Contributing
 
