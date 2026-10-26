@@ -2,6 +2,29 @@
 
 my custom set of skills, commands, hooks, and plugin config for Claude Code.
 
+## Getting Started
+
+New to Claude Code? Install it with the official native installer ([docs](https://code.claude.com/docs/en/setup)):
+
+```bash
+# macOS, Linux, WSL
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+```powershell
+# Windows PowerShell
+irm https://claude.ai/install.ps1 | iex
+```
+
+Then start a session from your project folder:
+
+```bash
+cd your-project
+claude          # start an interactive session
+```
+
+Just talk to it — describe what you want ("add a login form", "find why the build is slow"), and Claude reads, edits, and runs code for you. Type `/help` any time to see available commands.
+
 ## Installation
 
 ### Option 1: Install as Plugin
@@ -63,7 +86,37 @@ For a containerized deployment (isolated Linux environment with Claude Code pre-
 
 ## Usage
 
-Once installed, cc-plus adds skills, commands, and mods to Claude Code. Skills and commands load automatically; mods are installed per-plugin (see below).
+### What cc-plus adds
+
+With the plugin installed ([see Installation](#installation)), four kinds of capability become available in every session:
+
+| Surface | How you use it |
+| --- | --- |
+| **Skills** | Load automatically when relevant — e.g. ask for a chart, a `.docx`, or MCP-server help and the matching skill kicks in. You can also name one, e.g. "use the planning-with-files skill". |
+| **Commands** | Type a slash command, e.g. `/orchestrate ...` or `/cc:create-command`. Type `/` to browse them. |
+| **Subagents** | Delegate work to a named helper (see [Orchestration](#orchestration)), or let Claude pick one. |
+| **Mods** | Background behaviors like desktop notifications (see [Mods](#mods)). |
+
+If you're unsure what's available, just ask Claude in the session ("what skills/commands do I have?").
+
+### Orchestration
+
+`agents/` holds a small delegation hierarchy for running a larger task across several subagents:
+
+| Subagent | Role |
+| --- | --- |
+| [`orchestrator`](./agents/orchestrator.md) | Decomposes a goal into subtasks, delegates each to a worker, verifies results against acceptance criteria, and bounces failures back. Doesn't write code itself. |
+| [`implementer`](./agents/implementer.md) | Implements one scoped coding subtask. |
+| [`tester`](./agents/tester.md) | Writes and runs tests, reports objective evidence. |
+| [`reviewer`](./agents/reviewer.md) | Read-only quality gate; returns a PASS/FAIL verdict. |
+
+Kick it off with the `/orchestrate` command:
+
+```bash
+/orchestrate add rate limiting to the public API and cover it with tests
+```
+
+The orchestrator fans the work out to the workers (in parallel where it can), checks each result, and only reports done once the evidence holds up — so delegation and verification stay in one loop.
 
 ### Mods
 
