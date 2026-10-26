@@ -204,6 +204,7 @@ cc-plus pairs well with these plugins. They're not required and aren't installed
 
 - [humanizer](https://github.com/blader/humanizer) - removes AI-writing tells from text
 - [impeccable](https://github.com/pbakaus/impeccable) - frontend design fluency: `/impeccable polish`, `audit`, `critique`, ...
+- [rea](https://github.com/morluto/rea) - reverse engineer apps and native binaries via MCP (Hopper, Ghidra, IDA, JS/Electron, .NET)
 - [notify](./mods/notify) - desktop notifications, from this marketplace (`/plugin install notify@cc-plus`)
 
 To install the external ones, add their marketplaces first, then install:
