@@ -1,6 +1,6 @@
 # cc-plus
 
-A lean, curated set of custom skills, commands, hooks, and plugin config for Claude Code.
+my custom set of skills, commands, hooks, and plugin config for Claude Code.
 
 ## Installation
 
