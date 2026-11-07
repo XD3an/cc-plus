@@ -153,6 +153,7 @@ claude plugin test ./mods/notify
 ```
 cc-plus/
 ├── .claude-plugin/             # Plugin metadata (plugin.json, marketplace.json)
+├── .github/workflows/          # CI: plugin validation and mod tests
 ├── agents/                     # Custom subagents
 ├── commands/                   # Custom commands
 ├── examples/                   # Reference files (e.g. settings.json for manual installs)
@@ -188,14 +189,14 @@ For manual installs, start from [`examples/settings.json`](./examples/settings.j
 
 - [Claude Code Docs](https://code.claude.com/docs/en/overview) - Official documentation
 - [Claude Code Skills](https://github.com/anthropics/skills/tree/main/skills) - Official skills repository
-- [Claude Code Plugins](https://github.com/anthropics/claude-code/tree/main/plugins) - Official plugins
+- [Claude Code Plugins](https://github.com/anthropics/claude-plugins-official) - Official plugins
 
 > The document skills (`docx`, `pdf`, `pptx`, `xlsx`) are not redistributed here: they are under Anthropic's proprietary license. Get them from the official [anthropics/skills](https://github.com/anthropics/skills) repo or the `document-skills` plugin.
 
 ### Community Resources
 
 - [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) - Claude Code workflows, slash-commands, and templates
-- [superpowers-claude-code](https://github.com/obra/superpowers-claude-code) - Superpowers for Claude Code
+- [superpowers](https://github.com/obra/superpowers) - Superpowers for Claude Code
 - [compound-engineering-plugin](https://github.com/EveryInc/compound-engineering-plugin) - Compound Engineering Plugin for Claude Code
 
 ### Recommended Plugins
