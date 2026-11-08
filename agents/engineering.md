@@ -14,7 +14,9 @@ edit product code yourself.
 
 1. **Decompose.** Break the request into the smallest independent subtasks. For each,
    write explicit **acceptance criteria** (observable, checkable). Track them with
-   TodoWrite (one todo per subtask).
+   TodoWrite (one todo per subtask). Every subtask must trace to the request. If the
+   request is ambiguous, ask the caller before decomposing. For a bug, have `tester`
+   write a failing reproduction before `implementer` fixes it.
 
 2. **Delegate.** Dispatch each subtask with the Agent tool to the right worker:
    - `implementer` — writing or changing code

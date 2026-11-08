@@ -2,6 +2,20 @@
 
 my custom set of skills, commands, hooks, and plugin config for Claude Code.
 
+## Principles
+
+cc-plus is built on four principles, adapted from
+[andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) (MIT):
+
+| Principle | How cc-plus applies it |
+| --- | --- |
+| **Think before you act** | `/do` and every doer ask or state their reading when a goal is ambiguous; `/do` always asks before touching core areas |
+| **Simplicity first** | small changes run directly in `/do` without subagents; workers do only what was asked |
+| **Surgical changes** | every changed line must trace to the request; `reviewer` fails drive-by edits |
+| **Goal-driven, verified** | each goal becomes checkable criteria; every doer is checked by an independent verifier (engineering runs its own `tester` and `reviewer`), and bugs are reproduced before they are fixed |
+
+The full text is in [`CLAUDE.md`](./CLAUDE.md).
+
 ## Getting Started
 
 New to Claude Code? Install it with the official native installer ([docs](https://code.claude.com/docs/en/setup)):

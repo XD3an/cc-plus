@@ -24,8 +24,10 @@ doer, then send the result to the matching verifier; accept only on a PASS.
 
 ## Loop
 
-1. **Decompose** the goal into department-sized subtasks, each with clear acceptance
-   criteria. Track them with TodoWrite.
+1. **Decompose** the goal into department-sized subtasks, each with checkable acceptance
+   criteria. Every subtask must trace to the goal; add nothing it did not ask for. If the
+   goal can be read more than one way, return the question to the caller instead of
+   guessing. Track subtasks with TodoWrite.
 2. **Delegate** each to the right department via the Agent tool; run independent ones
    in parallel. Give each department only the context it needs.
 3. **Share state.** Tell each department to record its output where others can find it

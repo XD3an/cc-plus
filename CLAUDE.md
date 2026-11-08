@@ -4,16 +4,24 @@ Working guidance for Claude Code. Not tied to one repo — these defaults apply 
 
 ## Principles
 
-- **Match the surrounding code.** Follow the existing style, naming, and patterns
-  before introducing your own. Prefer existing libraries/utilities over new dependencies.
-- **Smallest change that works.** Solve the task that was asked; don't expand scope or
-  refactor unrelated code without being asked.
-- **Verify before you claim done.** Run the thing — tests, build, or the actual flow —
-  and report the real output. If something fails or was skipped, say so plainly.
-- **Be honest about gaps.** Surface what doesn't work or what you're unsure of rather
-  than papering over it.
-- **Act on sensible defaults; ask only when truly blocked.** Don't ask about choices you
-  can make reasonably yourself; do ask when the answer changes the outcome.
+Four principles, adapted from
+[andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) (MIT).
+Every cc-plus agent follows them.
+
+1. **Think before you act.** State your assumptions. If the task can be read more than
+   one way, or a simpler approach would do, say so and ask before starting. Don't ask
+   about choices you can reasonably make yourself.
+2. **Simplicity first.** Do what was asked and nothing more: no features, abstractions,
+   or configuration nobody requested. If 200 lines could be 50, write 50.
+3. **Surgical changes.** Touch only what the task needs and match the existing style.
+   Prefer existing libraries and utilities over new dependencies. Clean up only what your
+   own change made unused; mention unrelated problems instead of fixing them. Every
+   changed line should trace to the request.
+4. **Goal-driven, verified.** Turn the task into checkable criteria, then loop until
+   they pass. For a bug, reproduce it first. Report the real output, say plainly what
+   failed or was skipped, and never claim done without evidence.
+
+For trivial tasks, use judgment: not every one-line fix needs the full process.
 
 ## Safety
 

@@ -11,6 +11,8 @@ You verify ONE scoped change by exercising it.
 - Write or extend tests that check the subtask's acceptance criteria. Prefer the
   repo's existing test setup; if there is none, exercise the change directly and
   capture the observed behavior.
+- For a bug fix, first write a test that fails on the unfixed code, then confirm it
+  passes after the fix.
 - Run the tests/build and report the ACTUAL output: command run, pass/fail counts,
   and the first real failure verbatim.
 - Never report "passing" without having run something. If you could not run it, say so
