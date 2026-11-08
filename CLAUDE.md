@@ -4,9 +4,7 @@ Working guidance for Claude Code. Not tied to one repo — these defaults apply 
 
 ## Principles
 
-Four principles, adapted from
-[andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) (MIT).
-Every cc-plus agent follows them.
+Every cc-plus agent follows these four principles.
 
 1. **Think before you act.** State your assumptions. If the task can be read more than
    one way, or a simpler approach would do, say so and ask before starting. Don't ask
