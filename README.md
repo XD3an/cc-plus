@@ -4,8 +4,7 @@ my custom set of skills, commands, hooks, and plugin config for Claude Code.
 
 ## Principles
 
-cc-plus is built on four principles, adapted from
-[andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) (MIT):
+cc-plus is built on four principles:
 
 | Principle | How cc-plus applies it |
 | --- | --- |
@@ -212,6 +211,7 @@ For manual installs, start from [`examples/settings.json`](./examples/settings.j
 - [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) - Claude Code workflows, slash-commands, and templates
 - [superpowers](https://github.com/obra/superpowers) - Superpowers for Claude Code
 - [compound-engineering-plugin](https://github.com/EveryInc/compound-engineering-plugin) - Compound Engineering Plugin for Claude Code
+- [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) - the four coding principles cc-plus is built on (MIT)
 
 ### Recommended Plugins
 
