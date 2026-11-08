@@ -116,9 +116,15 @@ If you're unsure what's available, just ask Claude in the session ("what skills/
 
 `agents/` holds a delegation hierarchy modeled as a small company: a coordinator routes a goal to department agents, each department does its scoped work and reports back, and results are verified before they're accepted. **No agent performs outward actions** — anything bound for email, publishing, or an external system is produced as a draft for a human to send.
 
-**Company (cross-function)** — use `/do` when a goal spans more than one department; it hands off to the coordinator:
+**`/do <goal>`** is the single entry point:
+
+1. It writes 1-3 checkable completion criteria. If the goal can be read more than one way, or it touches a core area (payments, auth, permissions, secrets, migrations, deployment, or anything your `CLAUDE.md` lists), it asks first.
+2. A small, clear code change is done directly in the main conversation without subagents. Bugs are reproduced with a failing test first.
+3. Anything larger, or anything that spans departments, goes to the coordinator.
+4. The report lists each criterion with its evidence, what changed, and what was not tested.
 
 ```bash
+/do paginate(items, 1, 10) returns only 9 items, fix it
 /do research our top 3 competitors and draft a one-page summary
 ```
 
@@ -137,7 +143,7 @@ Each department pairs a **doer** with an independent **verifier** — the coordi
 
 Engineering runs its own internal loop — the lead delegates to the implementer, then the tester and reviewer; the other departments are verified by the coordinator. Note the honest difference: engineering's verification is a real test run, while the research / content / data verifiers are an independent second pass, not a mechanical gate.
 
-`/do` hands off to the coordinator, which fans the work out (in parallel where it can), runs each doer's result past its verifier, and holds anything outbound as a draft for you to send.
+For larger goals, the coordinator fans the work out (in parallel where it can), runs each doer's result past its verifier, re-checks anything revised later, and holds anything outbound as a draft for you to send.
 
 ### Mods
 

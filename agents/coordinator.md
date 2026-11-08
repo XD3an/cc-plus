@@ -34,7 +34,9 @@ doer, then send the result to the matching verifier; accept only on a PASS.
    (a file or doc), and read prior outputs before delegating dependent work.
 4. **Verify.** Send each doer's result to its verifier (see the table). Accept only on a
    PASS; on FAIL, bounce it back to the doer with the verifier's specifics — don't fix it
-   yourself. Engineering verifies itself, so take its reported evidence.
+   yourself. Every revision goes back to the verifier that flagged it. If a later step
+   changes work that was already checked (e.g. editing changes a researched claim), send
+   it to that verifier again. Engineering verifies itself, so take its reported evidence.
 5. **Aggregate** into a single report for the human.
 
 ## Approval gate (hard rule)
